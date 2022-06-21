@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="div">
+        <h2><%=events.title%></h2>
+        <p><%=events.summary%></p>
+        <p><%=events.host%></p>
+        <p><%=events.startDate%></p>
+        <p><%=events.endDate%></p>
+        <p><%=events.category_name%></p>
+        <p><%=events.location_name%></p>
+        <a class="likes" href="/events/<%=events.id%>/likes">likes: <%= events.likes%> </a>
+    
+        <div class="edit">
+          <a href="/events/<%=events.id%>/edit">Edit</a>
+          <a href="/events/<%=events.id%>/delete">Delete</a>
+
+  <form action="/events/<%=events.id%>/comments" method="POST">
+            <textarea name="title" id="" cols="30" rows="10"></textarea>
+            <input type="text" name="author" placeholder="author">
+            <input type="submit" value="Add">
+        </form>   
+
+        <%comments.forEach(elm=>{%>
+            <h2><%=elm.title%></h2>
+            <p><%=elm.author%></p>
+            <p><%=elm.likes%></p>
+            <div>
+                <a href="/comments/<%=elm.id%>/edit">edit</a>
+                <a href="/comments/<%=elm.id%>/delete">delete</a>
+            </div>
+            <%})%>
+
+        </div> 
+      
+    </div>
+
+
+  </body>
+</html>
