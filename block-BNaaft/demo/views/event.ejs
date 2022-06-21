@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+</head>
+
+<body>
+    <main>
+        <div class="big-div">
+            <div>
+                <%events.forEach(elm=>{%>
+                    <h2>
+                        <%= elm.title%>
+                    </h2>
+                    <p>
+                        <%=elm.category_name%>
+                    </p>
+                    <p>
+                        <%=elm.summary%>
+                    </p>
+                    <p>
+                        <%= elm.location_name%>
+                    </p>
+                   <a href="/events/<%=elm.id%>/details">Read More</a>
+                    <%})%>
+            </div>
+            <div>
+                <div>
+                    <!-- category_name start -->
+                    <form action="/events" method="GET">
+                        <h2>All Category</h2>
+                        <select name="category_name">
+                            <% allCategory.forEach(elm=>{ %>
+                                <option value="<%=elm%>">
+                                    <%=elm%>
+                                </option>
+                                <%})%>
+                        </select>
+                        <input type="submit" value="submit" />
+                    </form>
+                </div>
+                <div>
+                    <!-- location_name start -->
+
+                    <form action="/events" method="GET">
+                        <h2>All Locations</h2>
+                        <select name="location_name">
+                            <%locations.forEach(elm=>{%>
+                                <option value="<%=elm%>">
+                                    <%=elm%>
+                                </option>
+                                <%})%>
+                        </select>
+                        <input type="submit" />
+                    </form>
+                </div>
+                <div>
+                    <h2>All Date</h2>
+                    <form action="/events" method="GET">
+                        <div class="data-big">
+                            <input type="date" name="startDate" />
+                            <input type="date" name="endDate" />
+                            <input type="submit" value="Submit">
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        </div>
+    </main>
+</body>
+
+</html>
