@@ -1,5 +1,4 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -75,7 +74,163 @@ a {
   margin: .5rem 0;
 }
 .data-big>input{
-  margin: .5rem 0;
-  width: 100%;
+  margin: .5rem auto;
+  width: 80%;
   padding: .5rem 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+
+}
+.input-submit{
+padding: .5rem;
+font-size: 1.2rem;
+}
+.header>h1{
+  text-align: center;
+font-size: 2rem;
+border: 2px solid coral;
+background-color: steelblue;
+padding: .6rem;
+font-weight: 700;
+color: white;
+margin: 0;
+}
+.main{
+  background-image: url(../images/tom-podmore-tgah2ZvOh_8-unsplash.jpg);
+  background-position: 50% 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 90vh;
+  margin: 0;
+}
+.main-div{
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin: 0rem auto;
+  padding: 2rem 0;
+}
+.main-div>a{
+  font-size: 1.7rem;
+  text-decoration: none;
+  background-color: rgb(43, 226, 208);
+  padding: .5rem 1.2rem;
+  color: coral;
+  font-weight: bolder;
+}
+.first-form{
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: 0 auto;
+}
+.first-form>input{
+  margin: .4rem 0;
+  padding: .6rem 0;
+  font-size: 1.3rem;
+
+}
+.first-form>textarea{
+  font-size: 1.2rem;
+}
+input[type=text]:focus {
+  border: 3px solid cornflowerblue;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+}
+input[type=date]:focus{
+  border: 3px solid cornflowerblue;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+} 
+textarea[type=text]:focus{
+  border: 3px solid cornflowerblue;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+}
+input[type=submit]:focus{
+  border: 3px solid cornflowerblue;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+} 
+.form-header>h1{
+text-align: center;
+font-size: 2rem;
+font-weight: 600;
+text-transform: capitalize;
+letter-spacing: 2px;
+background-color: teal;
+width: 80%;
+margin: 0 auto;
+padding: .6rem;
+border-radius: 10px;
+}
+
+.list-div{
+  
+  width: 65%;
+}
+.category-div{
+  width: 30%;
+  height: 550px
+}
+.category-h2{
+  text-align: center;
+  font-size: 1.7rem;
+  font-weight: 600;
+  background-color: steelblue;
+  padding: .5rem 0;
+  border-radius: 20px;
+  margin: 0;
+}
+.category-form{
+  text-align: center;
+}
+.select{
+  width: 70%;
+  padding: .4rem;
+  font-size: 1.4rem;
+}
+.title{
+  font-size: 1.7rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+.summary{
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+.list-events{
+  text-align: center;
+  background-color: darkcyan;
+  padding: .5rem 0;
+  font-size: 1.7rem;
+  color: white;
+  width: 60%;
+  margin: 0 auto;
+  border-radius: 15px;
+}
+.btn{
+  text-decoration: none;
+  font-size: 1.1rem;
+background-color: slategrey;
+padding: .2rem .6rem;
+color: white;
+}
+.text{
+  font-size: 1.1rem;
+
+}
+.update-form{
+  text-align: center;
+  background-color: seagreen;
+  padding: .5rem;
+  margin: 0 auto;
+  width: 80%;
+  border-radius: 15px;
+  color: white;
 }

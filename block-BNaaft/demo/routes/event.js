@@ -97,7 +97,19 @@ router.get('/:id/delete', (req, res, next) => {
 // likes increment
 
 router.get("/:id/likes",(req,res,next)=>{
-  console.log(req.body.likes)
+  let id=req.params.id;
+  Event.findByIdAndUpdate(id,{$inc:{likes:1}},(err,events)=>{
+    if(err) return next(err);
+    res.redirect('/events/' + id + '/details');
+  })
+})
+
+router.get("/:id/dislikes",(req,res,next)=>{
+  let id=req.params.id; 
+    Event.findByIdAndUpdate(id,{$inc:{likes:-1}},(err,event)=>{
+      if(err) return next(err);
+      res.redirect('/events/' + id + '/details');
+    })
 })
 
 

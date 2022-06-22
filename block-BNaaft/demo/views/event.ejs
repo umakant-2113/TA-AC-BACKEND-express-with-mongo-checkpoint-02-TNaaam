@@ -12,59 +12,68 @@
 <body>
     <main>
         <div class="big-div">
-            <div>
+            
+            <div class="list-div">
+        
+                <h2 class="list-events"> List  Of All Events</h2>
                 <%events.forEach(elm=>{%>
-                    <h2>
+                    <h2 class="title">
                         <%= elm.title%>
                     </h2>
-                    <p>
+                    <p class="summary">
                         <%=elm.category_name%>
                     </p>
-                    <p>
+                    <p class="summary">
                         <%=elm.summary%>
                     </p>
-                    <p>
+                    <p class="summary">
                         <%= elm.location_name%>
                     </p>
-                   <a href="/events/<%=elm.id%>/details">Read More</a>
+                   <a class="btn" href="/events/<%=elm.id%>/details">Read More</a>
                     <%})%>
             </div>
-            <div>
-                <div>
-                    <!-- category_name start -->
-                    <form action="/events" method="GET">
-                        <h2>All Category</h2>
-                        <select name="category_name">
+
+
+            <div class="category-div">
+        
+                <h2 class="category-h2">All Category </h2>
+                <div >
+<!-- category_name start -->
+                    <form  action="/events" method="GET">
+                        <h2 class="category-form">All Category</h2>
+
+                        <select class="select"  name="category_name">
                             <% allCategory.forEach(elm=>{ %>
-                                <option value="<%=elm%>">
+                                <option  value="<%=elm%>">
                                     <%=elm%>
                                 </option>
                                 <%})%>
                         </select>
-                        <input type="submit" value="submit" />
+                        <input class="input-submit" type="submit" value="submit" />
                     </form>
                 </div>
                 <div>
+
                     <!-- location_name start -->
 
                     <form action="/events" method="GET">
-                        <h2>All Locations</h2>
-                        <select name="location_name">
+                        <h2  class="category-form">All Locations</h2>
+                        <select class="select" name="location_name">
                             <%locations.forEach(elm=>{%>
                                 <option value="<%=elm%>">
                                     <%=elm%>
                                 </option>
                                 <%})%>
                         </select>
-                        <input type="submit" />
+                        <input class="input-submit" type="submit" />
                     </form>
                 </div>
                 <div>
-                    <h2>All Date</h2>
+                    <h2  class="category-form">All Date</h2>
                     <form action="/events" method="GET">
                         <div class="data-big">
-                            <input type="date" name="startDate" />
-                            <input type="date" name="endDate" />
+                            <input class="input-date" type="date" name="startDate" />
+                            <input  class="input-date" type="date" name="endDate" />
                             <input type="submit" value="Submit">
                     </form>
 
