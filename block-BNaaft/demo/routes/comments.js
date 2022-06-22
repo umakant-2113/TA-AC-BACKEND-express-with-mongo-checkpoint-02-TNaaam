@@ -3,6 +3,8 @@ const router = express.Router();
 let Comment=require("../models/Comment");
 const { findByIdAndUpdate } = require('../models/Event');
 
+// update comments 
+
 router.get("/:id/edit",(req,res,next)=>{
     let id=req.params.id;
     Comment.findById(id,  (err,comment)=>{
@@ -14,9 +16,27 @@ router.get("/:id/edit",(req,res,next)=>{
 // post updated data 
 
 router.post("/:id/edit",(req,res,next)=>{
-    console.log(req.body)
     let id=req.params.id;
     Comment.findByIdAndUpdate(id, req.body, (err,comment)=>{
+        if(err) return next(err);
+        res.redirect("/events/"+ comment.eventId+"/details")
+    })
+})
+
+// likes 
+router.get("/:id/likes",(req,res,next)=>{
+    let id=req.params.id;
+    Comment.findByIdAndUpdate(id,{$inc:{likes:1}},(err,comment)=>{
+        if(err) return next(err);
+        res.redirect("/events/"+ comment.eventId+"/details")
+    })
+})
+
+// how to decrease likes
+
+router.get("/:id/dislike",(req,res,next)=>{
+    let id=req.params.id;
+    Comment.findByIdAndUpdate(id,{$inc:{likes: -1}},(err,comment)=>{
         if(err) return next(err);
         res.redirect("/events/"+ comment.eventId+"/details")
     })
