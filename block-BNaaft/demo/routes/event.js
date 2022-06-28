@@ -1,17 +1,16 @@
 const express = require('express');
 const router = express.Router();
 let Event = require('../models/Event');
-let Comment=require("../models/Comment")
+let moment=require("moment");
+let Comment = require('../models/Comment');
+let {format}=require("date-fns");
 
 //list of events
 
-
-
 router.get('/', (req, res, next) => {
-
   let { location_name, category_name } = req.query;
   let allCategory = [];
-  let  locations = [];
+  let locations = [];
 
   let obj = {};
   Event.find({}, (err, events) => {
@@ -22,31 +21,33 @@ router.get('/', (req, res, next) => {
         allCategory.push(elm);
       });
     });
-     allCategory = Array.from(new Set(allCategory));
+    allCategory = Array.from(new Set(allCategory));
     //  location find
 
-    
     events.forEach((elm) => {
       locations.push(elm.location_name);
     });
-     locations = Array.from(new Set( locations));
-
-    
+    locations = Array.from(new Set(locations));
   });
-  if(location_name){
-    obj={location_name:location_name}
-  }else if(category_name){
-    obj={category_name: category_name}
-  }else if(req.query.startDate){
-    console.log(req.query)
-    obj={$and:[{startDate:{$gte:req.query.startDate}},{endDate:{$lte:req.query.endDate}}]}
+  if (location_name) {
+    obj = { location_name: location_name };
+  } else if (category_name) {
+    obj = { category_name: category_name };
+  } else if (req.query.startDate) {
+    console.log(req.query);
+    obj = {
+      $and: [
+        { startDate: { $gte: req.query.startDate } },
+        { endDate: { $lte: req.query.endDate } },
+      ],
+    };
   }
 
   Event.find(obj, (err, events) => {
     if (err) return next(err);
     res.render('event', { events, allCategory, locations });
   });
-  });
+});
 
 // add events
 router.get('/new', (req, res, next) => {
@@ -56,6 +57,7 @@ router.get('/new', (req, res, next) => {
 // capture the all event
 
 router.post('/new', (req, res, next) => {
+  console.log(req.body);
   req.body.category_name = req.body.category_name.split(' ');
   Event.create(req.body, (err, event) => {
     if (err) return next(err);
@@ -63,14 +65,12 @@ router.post('/new', (req, res, next) => {
   });
 });
 
-
-
 // edit form data
 router.get('/:id/edit', (req, res, next) => {
   let id = req.params.id;
   Event.findById(id, (err, events) => {
     if (err) return next(err);
-    res.render('update', {events});
+    res.render('update', { events,format });
   });
 });
 
@@ -96,47 +96,48 @@ router.get('/:id/delete', (req, res, next) => {
 
 // likes increment
 
-router.get("/:id/likes",(req,res,next)=>{
-  let id=req.params.id;
-  Event.findByIdAndUpdate(id,{$inc:{likes:1}},(err,events)=>{
-    if(err) return next(err);
+router.get('/:id/likes', (req, res, next) => {
+  let id = req.params.id;
+  Event.findByIdAndUpdate(id, { $inc: { likes: 1 } }, (err, events) => {
+    if (err) return next(err);
     res.redirect('/events/' + id + '/details');
-  })
-})
+  });
+});
 
-router.get("/:id/dislikes",(req,res,next)=>{
-  let id=req.params.id; 
-    Event.findByIdAndUpdate(id,{$inc:{likes:-1}},(err,event)=>{
-      if(err) return next(err);
-      res.redirect('/events/' + id + '/details');
-    })
-})
+router.get('/:id/dislikes', (req, res, next) => {
+  let id = req.params.id;
+  Event.findById(id, (err, events) => {
+    if (events.likes > 0) {
+      Event.findByIdAndUpdate(id, { $inc: { likes: -1 } }, (err, events) => {
+        if (err) return next(err);
+        res.redirect('/events/' + id + '/details');
+      });
+    }
+  });
+});
 
+// add comment
+router.post('/:id/comments', (req, res, next) => {
+  console.log(req.body);
+  let id = req.params.id;
+  req.body.eventId = id;
+  Comment.create(req.body, (err, comments) => {
+    if (err) return next(err);
+    res.redirect('/events/' + id + '/details');
+  });
+});
 
+// details page
 
-// add comment 
-router.post("/:id/comments",(req,res,next)=>{
-  console.log(req.body)
-  let id=req.params.id;
-  req.body.eventId=id;
-  Comment.create(req.body,(err,comments)=>{
-    if(err) return next(err)
-    res.redirect("/events/"+id+"/details")
-  })
-})
-
-// details page 
-
-
-router.get("/:id/details",(req,res,next)=>{
-  let id=req.params.id;
-  Event.findById(id,(err,events)=>{
-    Comment.find({eventId:id},(err,comments)=>{
-      if(err)return next(err);
-      res.render("details",{events,comments})
-    })
-  })
-})
-
+router.get('/:id/details', (req, res, next) => {
+  let id = req.params.id;
+  Event.findById(id, (err, events) => {
+             
+    Comment.find({ eventId: id }, (err, comments) => {
+      if (err) return next(err);
+      res.render('details', { events, comments,format });
+    });
+  });
+});
 
 module.exports = router;

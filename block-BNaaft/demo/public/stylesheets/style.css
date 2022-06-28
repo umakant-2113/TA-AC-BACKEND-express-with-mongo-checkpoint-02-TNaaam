@@ -191,7 +191,7 @@ border-radius: 10px;
   text-align: center;
 }
 .select{
-  width: 70%;
+  width: 60%;
   padding: .4rem;
   font-size: 1.4rem;
 }
@@ -233,4 +233,63 @@ color: white;
   width: 80%;
   border-radius: 15px;
   color: white;
+}
+.event-title{
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+.event-para{
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+.edit-btn{
+  margin: 1.5rem 0 ;
+}
+.edit-btn>a{
+  margin: 0 1.4rem 0 0 ;
+  background-color: cornflowerblue;
+  padding: .5rem 1.4rem;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+.dislikes{
+  margin: 0  1rem;
+  background-color: red;
+  font-size: 1.3rem;
+  font-weight: 600;
+  text-decoration: none;
+  padding: .3rem 1rem;
+}
+.comment-form{
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+}
+.comment-form>textarea{
+  margin: .8rem 0;
+  font-size: 1.2rem;
+}
+.comment-form>input{
+  margin: .8rem 0;
+  padding: .4rem 0;
+  font-size: 1.2rem;
+}
+.likes-div>a{
+margin: 0 1rem  0 ;
+}
+.comment-update{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 40%;
+  margin: 0 auto;
+}
+.comment-update>textarea{
+  margin: .6rem 0;
+}
+.comment-update>input{
+  margin: .7rem 0;
 }
