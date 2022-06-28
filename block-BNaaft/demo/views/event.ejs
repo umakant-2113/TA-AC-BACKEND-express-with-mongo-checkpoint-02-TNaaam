@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li>
+                    <a href="#">Event Managment</a>
+                </li>
+                <li>
+                    <a href="/">Home</a>
+                </li>
+                <li>
+                    <a href="/events/new">Add Event</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+   
+        <div class="big-div">
+            
+            <div class="list-div">
+        
+                <h2 class="list-events"> List  Of All Events</h2>
+                <%events.forEach(elm=>{%>
+                    <h2 class="title">
+                        <%= elm.title%>
+                    </h2>
+                    <p class="summary">
+                        <%=elm.category_name%>
+                    </p>
+                    <p class="summary">
+                        <%=elm.summary%>
+                    </p>
+                    <p class="summary">
+                        <%= elm.location_name%>
+                    </p>
+                   <a class="btn" href="/events/<%=elm.id%>/details">Read More</a>
+                    <%})%>
+            </div>
+
+
+            <div class="category-div">
+        
+                <h2 class="category-h2">All Category </h2>
+                <div >
+<!-- category_name start -->
+                    <form  action="/events" method="GET">
+                        <h2 class="category-form">All Category</h2>
+
+                        <select class="select"  name="category_name">
+                            <% allCategory.forEach(elm=>{ %>
+                                <option  value="<%=elm%>">
+                                    <%=elm%>
+                                </option>
+                                <%})%>
+                        </select>
+                        <input class="input-submit" type="submit" value="submit" />
+                    </form>
+                </div>
+                <div>
+
+                    <!-- location_name start -->
+
+                    <form action="/events" method="GET">
+                        <h2  class="category-form">All Locations</h2>
+                       
+                        <select class="select" name="location_name">
+                            <%locations.forEach(elm=>{%>
+                                <option value="<%=elm%>">
+                                    <%=elm%>
+                                </option>
+                                <%})%>
+                        </select>
+                        <input class="input-submit" type="submit" />
+                    </form>
+                </div>
+                <div>
+                    <h2  class="category-form">All Date</h2>
+                    <form action="/events" method="GET">
+                        <div class="data-big">
+                            <input class="input-date" type="date" name="startDate" />
+                            <input  class="input-date" type="date" name="endDate" />
+                            <input type="submit" value="Submit">
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        </div>
+    </main>
+</body>
+
+</html>

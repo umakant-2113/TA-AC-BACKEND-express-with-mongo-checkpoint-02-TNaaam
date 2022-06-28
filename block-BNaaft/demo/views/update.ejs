@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+    <header> <h2 class="update-form"> Events  Update Form </h2></header>
+    <form action="/events/<%=events.id%>/edit" method="POST">
+        <div class="first-form">
+        <input type="text" name="title" value="<%= events.title%>" placeholder="Title">
+        <textarea class="text" name="summary" id="" cols="30" rows="8"   placeholder="Summary"><%= events.summary%></textarea>
+        <input type="text" name="host" placeholder="host " value="<%=events.host%>">
+        <input type="date" name="startDate" placeholder="Strat date"  value="<%= format(events.startDate,  'yyyy-MM-dd')%>">
+        <input type="date" name="endDate" placeholder="End date"   value="<%=format(events.endDate, 'yyyy-MM-dd' )%>">
+        <input type="text" name="category_name" placeholder="Category"  value="<%= events.category_name %>">
+        <input type="text" name="location_name" placeholder="location"  value="<%= events.location_name %>" >
+        <input type="submit" value="Add">
+    </div>
+</body>
+</html>
