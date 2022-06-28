@@ -36,9 +36,14 @@ router.get("/:id/likes",(req,res,next)=>{
 
 router.get("/:id/dislike",(req,res,next)=>{
     let id=req.params.id;
-    Comment.findByIdAndUpdate(id,{$inc:{likes: -1}},(err,comment)=>{
-        if(err) return next(err);
-        res.redirect("/events/"+ comment.eventId+"/details")
+    Comment.findById(id,(err,comment)=>{
+        if(comment.likes>0){
+            Comment.findByIdAndUpdate(id,{$inc:{likes: -1}},(err,comment)=>{
+                if(err) return next(err);
+                res.redirect("/events/"+ comment.eventId+"/details")
+        })
+    }
+   
     })
 })
 

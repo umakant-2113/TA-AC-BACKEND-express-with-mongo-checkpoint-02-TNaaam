@@ -1,58 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="../public/stylesheets/style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
     <div class="div">
-        <h2><%=events.title%></h2>
-        <p><%=events.summary%></p>
-        <p><%=events.host%></p>
-        <p><%=events.startDate%></p>
-        <p><%=events.endDate%></p>
-        <p><%=events.category_name%></p>
-        <p><%=events.location_name%></p>
-        <p><%=  events.likes%></p>
-        <!-- likes btn -->
-        <div>
-            <a class="likes" href="/events/<%=events.id%>/likes">likes</a>
-            <a  class="dislikes" href="/events/<%=events.id%>/dislikes">dislike</a>
-        </div>
-     <!-- edit btn -->
-        <div>
-            <a href="/events/<%=events.id%>/edit">Edit</a>
-            <a href="/events/<%=events.id%>/delete">Delete</a>
-        </div>
-    
-        <div class="edit">
-  <form action="/events/<%=events.id%>/comments" method="POST">
-            <textarea name="title" id="" cols="30" rows="10"></textarea>
-            <input type="text" name="author" placeholder="author">
-            <input type="submit" value="Add">
-        </form>   
+      <h2  class="event-title"><%=events.title%></h2>
+      <p class="event-para"><%=events.summary%></p>
+      <p class="event-para"><%=events.host%></p>
+      <p class="event-para"> startDate: <%=format(events.startDate, 'yyyy-MM-dd' )%></p>
+      <p class="event-para"> endDate :<%= format(events.endDate,'yyyy-MM-dd')%></p>
+      <p class="event-para"><%=events.category_name%></p>
+      <p class="event-para"><%=events.location_name%></p>
+      <p class="likes-details">  <%= events.likes%> </p>
+      <!-- likes btn -->
+
+      <div>
+        <a class="likes" href="/events/<%=events.id%>/likes">likes</a>
+        <a class="dislikes" href="/events/<%=events.id%>/dislikes">dislike</a>
+      </div>
+      <!-- edit btn -->
+
+      <div class="edit-btn">
+        <a href="/events/<%=events.id%>/edit">Edit</a>
+        <a href="/events/<%=events.id%>/delete">Delete</a>
+      </div>
+
+      <div >
+        <h2> Comment Add</h2>
+        <form class="comment-form" action="/events/<%=events.id%>/comments" method="POST">
+          <textarea name="title" id="" cols="30" rows="10" placeholder="Comments"></textarea>
+          <input type="text" name="author" placeholder="Author" />
+          <input type="submit" value="Add" />
+        </form>
 
         <%comments.forEach(elm=>{%>
-            <h2><%=elm.title%></h2>
-            <p><%=elm.author%></p>
-            <p><%=elm.likes%></p>
-            <div>
-                <a href="/comments/<%=elm.id%>/likes"> likes:  </a>
-                <a href="/comments/<%=elm.id%>/dislike"> Dislikes </a>
-            </div>
-            <div>
-                <a href="/comments/<%=elm.id%>/edit">edit</a>
-                <a href="/comments/<%=elm.id%>/delete">delete</a>
-            </div>
-            <%})%>
+        <h2><%=elm.title%></h2>
+        <p><%=elm.author%></p>
+        <p><%=elm.likes%></p>
 
-        </div> 
-      
+        <div class="likes-div">
+          <a href="/comments/<%=elm.id%>/likes"> likes: </a>
+          <a href="/comments/<%=elm.id%>/dislike"> Dislikes </a>
+        </div>
+        <div>
+          <a href="/comments/<%=elm.id%>/edit">edit</a>
+          <a href="/comments/<%=elm.id%>/delete">delete</a>
+        </div>
+        <%})%>
+      </div>
     </div>
-
-
   </body>
 </html>
